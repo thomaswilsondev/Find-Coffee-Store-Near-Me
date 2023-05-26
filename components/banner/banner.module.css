@@ -1,6 +1,8 @@
 /** By default, this is a mobile breakpoint **/
 .container {
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
 .title {
@@ -68,7 +70,8 @@
     font-size: 3rem /* 48px */;
     line-height: 1;
   }
-
+  .button {
+  }
   .subTitle {
     margin-top: 1.25rem;
     max-width: 36rem;
