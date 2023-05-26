@@ -91,6 +91,14 @@
   }
 }
 
+.heading2 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  padding-bottom: 2rem;
+  margin-top: 2rem;
+  color: var(--text-white-100);
+}
+
 @media (min-width: 1280px) {
   .main {
     margin-top: 7rem /* 112px */;
