@@ -11,7 +11,7 @@ const DynamicRoute = () => {
       <Head>
         <title>{query}</title>
       </Head>
-      <div>{` Hi There I am a dynamic route: ${query}`}</div>;
+      <div>{` Hi There I am a dynamic route: ${query}`}</div>
     </>
   );
 };
