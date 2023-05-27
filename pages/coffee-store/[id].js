@@ -16,10 +16,11 @@ export async function getStaticProps(staticProps) {
   console.log("params", params);
 
   const coffeeStores = await fetchCoffeeStores();
+  console.log(coffeeStores);
   return {
     props: {
       coffeeStore: coffeeStores.find((coffeeStore) => {
-        return coffeeStore.fsq_id.toString() === params.id; //dynamic id
+        return coffeeStore.id.toString() === params.id; //dynamic id
       }),
     },
   };
@@ -30,7 +31,7 @@ export async function getStaticPaths() {
   const paths = coffeeStores.map((coffeeStore) => {
     return {
       params: {
-        id: coffeeStore.fsq_id.toString(),
+        id: coffeeStore.id.toString(),
       },
     };
   });
@@ -45,9 +46,7 @@ const CoffeeStore = (props) => {
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
-
-  const { location, name, imgUrl } = props.coffeeStore;
-  console.log(props.coffeeStore);
+  const { name, address, cross_street, imgUrl } = props.coffeeStore;
   const handleUpvoteButton = () => {};
 
   return (
@@ -59,7 +58,7 @@ const CoffeeStore = (props) => {
         <div className={styles.col1}>
           <div className={styles.backToHomeLink}>
             <Link href="/">
-              <a>Back to home</a>
+              <a>← Back to home</a>
             </Link>
           </div>
           <div className={styles.nameWrapper}>
@@ -78,16 +77,16 @@ const CoffeeStore = (props) => {
         </div>
 
         <div className={cls("glass", styles.col2)}>
-          {location.formatted_address && (
+          {address && (
             <div className={styles.iconWrapper}>
               <Image src="/static/icons/places.svg" width="24" height="24" />
-              <p className={styles.text}>{location.formatted_address}</p>
+              <p className={styles.text}>{address}</p>
             </div>
           )}
-          {location.neighborhood && (
+          {cross_street && (
             <div className={styles.iconWrapper}>
               <Image src="/static/icons/nearMe.svg" width="24" height="24" />
-              <p className={styles.text}>{location.neighborhood}</p>
+              <p className={styles.text}>{cross_street}</p>
             </div>
           )}
           <div className={styles.iconWrapper}>
