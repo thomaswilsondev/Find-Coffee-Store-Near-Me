@@ -52,7 +52,9 @@
   vertical-align: middle;
   border-style: none;
 }
-
+.sectionWrapper {
+  margin-top: 2rem;
+}
 .col2 {
   border-radius: 1rem /* 16px */;
   padding: 1rem /* 16px */;
