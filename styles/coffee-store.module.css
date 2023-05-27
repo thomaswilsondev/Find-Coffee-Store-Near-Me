@@ -55,7 +55,7 @@
 
 .col2 {
   border-radius: 1rem /* 16px */;
-  padding: 1.7rem /* 27.2px */;
+  padding: 1rem /* 16px */;
   display: flex;
   flex-direction: column;
   margin-left: 0.5rem /* 8px */;
@@ -65,7 +65,7 @@
 }
 
 .iconWrapper {
-  padding: 0.5rem; /*8px */
+  padding: 0.3rem; /*4.8px */
   display: flex;
   margin-bottom: 1rem /* 16px */;
 }
