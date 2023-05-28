@@ -31,7 +31,6 @@ export default function Home(props) {
     useTrackLocation();
   // const [coffeeStores, setCoffeeStores] = useState("");
   const { dispatch, state } = useContext(StoreContext);
-  console.log({ latLong, locationErrorMsg });
   const { coffeeStores, latLong } = state;
   useEffect(() => {
     async function setCoffeeStoresByLocation() {
