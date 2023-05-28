@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useContext } from "react";
-import { ACTION_TYPES, StoreContext } from "./_app";
+import { ACTION_TYPES, StoreContext } from "../store/store-context";
 import Banner from "../components/banner/banner";
 import Card from "../components/card/card";
 
