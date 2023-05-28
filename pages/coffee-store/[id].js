@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import cls from "classnames";
 
-import styles from "../../styles/coffee-store.module.css";
+import styles from "../../styles/coffee-store.module.scss";
 import { fetchCoffeeStores } from "../../lib/coffee-store";
 
 import { StoreContext } from "../../store/store-context";
@@ -83,8 +83,8 @@ const CoffeeStore = (initialProps) => {
               <a>← Back to home</a>
             </Link>
           </div>
-          <div className={styles.nameWrapper}>
-            <h1 className={styles.name}>{name}</h1>
+          <div className={styles.wrapperName}>
+            <h1 className={styles.tittleName}>{name}</h1>
           </div>
           <Image
             src={
@@ -100,20 +100,20 @@ const CoffeeStore = (initialProps) => {
 
         <div className={cls("glass", styles.col2)}>
           {address && (
-            <div className={styles.iconWrapper}>
+            <div className={styles.wrapperIcon}>
               <Image src="/static/icons/places.svg" width="24" height="24" />
-              <p className={styles.text}>{address}</p>
+              <p className={styles.tittleText}>{address}</p>
             </div>
           )}
           {neighbourhood && (
-            <div className={styles.iconWrapper}>
+            <div className={styles.wrapperIcon}>
               <Image src="/static/icons/nearMe.svg" width="24" height="24" />
-              <p className={styles.text}>{neighbourhood}</p>
+              <p className={styles.tittleText}>{neighbourhood}</p>
             </div>
           )}
-          <div className={styles.iconWrapper}>
+          <div className={styles.wrapperIcon}>
             <Image src="/static/icons/star.svg" width="24" height="24" />
-            <p className={styles.text}>1</p>
+            <p className={styles.tittleText}>1</p>
           </div>
 
           <button className={styles.upvoteButton} onClick={handleUpvoteButton}>

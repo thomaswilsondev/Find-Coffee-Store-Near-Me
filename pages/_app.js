@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../styles/globals.scss";
 import StoreProvider from "@/store/store-context";
 function MyApp({ Component, pageProps }) {
   return (

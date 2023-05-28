@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 import { useContext } from "react";
 import { ACTION_TYPES, StoreContext } from "../store/store-context";
 import Banner from "../components/banner/banner";
@@ -75,11 +75,11 @@ export default function Home(props) {
         />
         {locationErrorMsg && <p>Something went wrong: {locationErrorMsg}</p>}
         {coffeeStoresError && <p>Something went wrong: {coffeeStoresError}</p>}
-        <div className={styles.heroImage}>
+        <div className={styles.cardHeroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
         </div>
         {coffeeStores.length > 0 && (
-          <div className={styles.sectionWrapper}>
+          <div className={styles.wrapperSection}>
             <h2 className={styles.heading2}>Stores near me</h2>
             <div className={styles.cardLayout}>
               {coffeeStores.map((coffeeStore) => {
@@ -99,7 +99,7 @@ export default function Home(props) {
             </div>
           </div>
         )}
-        <div className={styles.sectionWrapper}>
+        <div className={styles.wrapperSection}>
           {props.coffeeStores.length > 0 && (
             <>
               <h2 className={styles.heading2}>Toronto stores</h2>

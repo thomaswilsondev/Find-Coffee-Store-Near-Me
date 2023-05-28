@@ -1,4 +1,4 @@
-import styles from "./banner.module.css";
+import styles from "./banner.module.scss";
 import classNames from "classnames";
 const Banner = (props) => {
   return (
@@ -7,7 +7,7 @@ const Banner = (props) => {
         <span className={styles.title1}>Coffee</span>
         <span className={styles.title2}>Connoisseur</span>
       </h1>
-      <p className={styles.subTitle}>Discover your local coffee stores!</p>
+      <p className={styles.titleSub}>Discover your local coffee stores!</p>
       <button
         className={classNames(styles.button, styles.buttonWrapper)}
         onClick={props.handleOnClick}
