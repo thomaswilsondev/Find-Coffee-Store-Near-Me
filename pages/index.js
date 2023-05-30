@@ -32,6 +32,7 @@ export default function Home(props) {
   // const [coffeeStores, setCoffeeStores] = useState("");
   const { dispatch, state } = useContext(StoreContext);
   const { coffeeStores, latLong } = state;
+  console.log({ latLong, locationErrorMsg });
   useEffect(() => {
     async function setCoffeeStoresByLocation() {
       if (latLong) {
@@ -40,13 +41,15 @@ export default function Home(props) {
             `/api/getCoffeeStoresByLocation?latLong=${latLong}&limit=30`
           );
           console.log("fetched coffee stores", { fetchedCoffeeStores });
+          const coffeeStores = await response.json(fetchCoffeeStores);
           // setCoffeeStores(fetchedCoffeeStores);
           dispatch({
             type: ACTION_TYPES.SET_COFFEE_STORES,
             payload: {
-              coffeeStores: fetchedCoffeeStores,
+              coffeeStores,
             },
           });
+          setCoffeeStoresError("");
           //set coffee stores
         } catch (error) {
           //set error
