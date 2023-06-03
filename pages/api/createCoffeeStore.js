@@ -1,37 +1,30 @@
-const Airtable = require("airtable");
-const base = new Airtable({ apiKey: "key4DkHhRaUI7Qtx4" }).base(
-  "appJ8VyKa8asnMKMq"
-);
-const table = base("coffee-store");
+import { table, getMinifiedRecords } from "../../lib/airtable";
 
-console.log({ table });
 const createCoffeeStore = async (req, res) => {
-  console.log({ req });
-
-  //CREATE A RECORDS
   if (req.method === "POST") {
-    const { id, name, neighbourhood, address, imgUrl, voting } = req.body[0];
+    table.destroy("4d53cba72f638cfaa47a666a", function (err, deletedRecord) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      console.log("Deleted record", deletedRecord.id);
+    });
+    //find a record
+    const { id, name, neighbourhood, address, imgUrl, voting } = req.body;
+
     try {
-      //CHECK ID
       if (id) {
         const findCoffeeStoreRecords = await table
           .select({
-            filterByFormula: `id=${id}`,
+            filterByFormula: `id="${id}"`,
           })
           .firstPage();
 
-        console.log({ findCoffeeStoreRecords });
-
         if (findCoffeeStoreRecords.length !== 0) {
-          const records = findCoffeeStoreRecords.map((record) => {
-            return {
-              ...record.fields,
-            };
-          });
+          const records = getMinifiedRecords(findCoffeeStoreRecords);
           res.json(records);
         } else {
           //create a record
-          //CHECK NAME
           if (name) {
             const createRecords = await table.create([
               {
@@ -46,28 +39,23 @@ const createCoffeeStore = async (req, res) => {
               },
             ]);
 
-            const records = createRecords.map((record) => {
-              return {
-                ...record.fields,
-              };
-            });
+            const records = getMinifiedRecords(createRecords);
             res.json(records);
           } else {
-            //ERROR ID AND NAME
-            res.status(400).json({ message: "Id or name is missing" });
+            res.status(400);
+            res.json({ message: "Id or name is missing" });
           }
         }
       } else {
-        //ERROR ID
-        res.status(400).json({ message: "Id is missing" });
+        res.status(400);
+        res.json({ message: "Id is missing" });
       }
     } catch (err) {
-      ///ERROR CREATE OR  FINDING A STORE
       console.error("Error creating or finding a store", err);
-      res
-        .status(500)
-        .json({ message: "Error creating or finding a store", err });
+      res.status(500);
+      res.json({ message: "Error creating or finding a store", err });
     }
   }
 };
+
 export default createCoffeeStore;

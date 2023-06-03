@@ -56,6 +56,32 @@ const CoffeeStore = (initialProps) => {
     state: { coffeeStores },
   } = useContext(StoreContext);
 
+  const handleCreateCoffeeStore = async (coffeeStore) => {
+    try {
+      const { id, name, voting, imgUrl, neighbourhood, address } = coffeeStore;
+
+      const response = await fetch("/api/createCoffeeStore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          voting: 0,
+          imgUrl,
+          neighbourhood: neighbourhood || "",
+          address: address || "",
+        }),
+      });
+
+      const dbCoffeeStore = await response.json();
+      console.log({ dbCoffeeStore });
+    } catch (err) {
+      console.error("Error creating coffee store", err);
+    }
+  };
+
   useEffect(() => {
     if (isEmpty(initialProps.coffeeStore)) {
       if (coffeeStores.length > 0) {
@@ -63,13 +89,23 @@ const CoffeeStore = (initialProps) => {
           return coffeeStore.id.toString() === id; //dynamic id
         });
         setCoffeeStore(findCoffeeStoreById);
+        handleCreateCoffeeStore(findCoffeeStoreById);
       }
+    } else {
+      // SSG
+      handleCreateCoffeeStore(initialProps.coffeeStore);
     }
-  }, [id]);
+  }, [id, initialProps.coffeeStore]);
 
   const { name, address, neighbourhood, imgUrl } = coffeeStore;
 
-  const handleUpvoteButton = () => {};
+  const [votingCount, setVotingCount] = useState(1);
+
+  const handleUpvoteButton = () => {
+    console.log("handle upvote");
+    let count = votingCount + 1;
+    setVotingCount(count);
+  };
 
   return (
     <div className={styles.layout}>
@@ -83,8 +119,8 @@ const CoffeeStore = (initialProps) => {
               <a>← Back to home</a>
             </Link>
           </div>
-          <div className={styles.wrapperName}>
-            <h1 className={styles.tittleName}>{name}</h1>
+          <div className={styles.nameWrapper}>
+            <h1 className={styles.name}>{name}</h1>
           </div>
           <Image
             src={
@@ -100,20 +136,20 @@ const CoffeeStore = (initialProps) => {
 
         <div className={cls("glass", styles.col2)}>
           {address && (
-            <div className={styles.wrapperIcon}>
+            <div className={styles.iconWrapper}>
               <Image src="/static/icons/places.svg" width="24" height="24" />
-              <p className={styles.tittleText}>{address}</p>
+              <p className={styles.text}>{address}</p>
             </div>
           )}
           {neighbourhood && (
-            <div className={styles.wrapperIcon}>
+            <div className={styles.iconWrapper}>
               <Image src="/static/icons/nearMe.svg" width="24" height="24" />
-              <p className={styles.tittleText}>{neighbourhood}</p>
+              <p className={styles.text}>{neighbourhood}</p>
             </div>
           )}
-          <div className={styles.wrapperIcon}>
+          <div className={styles.iconWrapper}>
             <Image src="/static/icons/star.svg" width="24" height="24" />
-            <p className={styles.tittleText}>1</p>
+            <p className={styles.text}>{votingCount}</p>
           </div>
 
           <button className={styles.upvoteButton} onClick={handleUpvoteButton}>
