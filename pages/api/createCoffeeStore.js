@@ -1,10 +1,14 @@
-import {
-  table,
-  getMinifiedRecords,
-  findRecordByFilter,
-} from "../../lib/airtable";
+const Airtable = require("airtable");
+const base = new Airtable({ apiKey: "key4DkHhRaUI7Qtx4" }).base(
+  "appJ8VyKa8asnMKMq"
+);
+const table = base("coffee-store");
 
+console.log({ table });
 const createCoffeeStore = async (req, res) => {
+  console.log({ req });
+
+  //CREATE A RECORDS
   if (req.method === "POST") {
     //find a record
 
@@ -14,7 +18,14 @@ const createCoffeeStore = async (req, res) => {
       if (id) {
         const records = await findRecordByFilter(id);
 
-        if (records.length !== 0) {
+        console.log({ findCoffeeStoreRecords });
+
+        if (findCoffeeStoreRecords.length !== 0) {
+          const records = findCoffeeStoreRecords.map((record) => {
+            return {
+              ...record.fields,
+            };
+          });
           res.json(records);
         } else {
           //create a record
