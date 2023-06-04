@@ -4,6 +4,8 @@ import Link from "next/link";
 import Head from "next/head";
 import Image from "next/image";
 
+import useSWR from "swr";
+
 import cls from "classnames";
 
 import styles from "../../styles/coffee-store.module.scss";
@@ -11,7 +13,7 @@ import { fetchCoffeeStores } from "../../lib/coffee-store";
 
 import { StoreContext } from "../../store/store-context";
 
-import { isEmpty } from "../../utils";
+import { fetcher, isEmpty } from "../../utils";
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params;
@@ -56,6 +58,31 @@ const CoffeeStore = (initialProps) => {
     state: { coffeeStores },
   } = useContext(StoreContext);
 
+  const handleCreateCoffeeStore = async (coffeeStore) => {
+    try {
+      const { id, name, voting, imgUrl, neighbourhood, address } = coffeeStore;
+      const response = await fetch("/api/createCoffeeStore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          name,
+          voting: 0,
+          imgUrl,
+          neighbourhood: neighbourhood || "",
+          address: address || "",
+        }),
+      });
+
+      const dbCoffeeStore = await response.json();
+      console.log({ dbCoffeeStore });
+    } catch (err) {
+      console.error("Error creating coffee store", err);
+    }
+  };
+
   useEffect(() => {
     if (isEmpty(initialProps.coffeeStore)) {
       if (coffeeStores.length > 0) {
@@ -75,11 +102,25 @@ const CoffeeStore = (initialProps) => {
 
   const [votingCount, setVotingCount] = useState(1);
 
+  const { data, error } = useSWR(`/api/getCoffeeStoreById?id=${id}`, fetcher);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      console.log("data from SWR", data);
+      setCoffeeStore(data[0]);
+      setVotingCount(data[0].voting);
+    }
+  }, [data]);
+
   const handleUpvoteButton = () => {
     console.log("handle upvote");
     let count = votingCount + 1;
     setVotingCount(count);
   };
+
+  if (error) {
+    return <div>Something went wrong retrieving coffee store page</div>;
+  }
 
   return (
     <div className={styles.layout}>
