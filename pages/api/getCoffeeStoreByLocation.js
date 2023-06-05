@@ -1,6 +1,4 @@
-//Router /api/getCoffeeStoresByLocation?latLong=34,45&limit=30
-//localhost:3000/api/getCoffeeStoresByLocation?latLong=10.869214749283616,106.7493411249436&limit=30
-import { fetchCoffeeStores } from "../../lib/coffee-store";
+import { fetchCoffeeStores } from "../../lib/coffee-stores";
 
 const getCoffeeStoresByLocation = async (req, res) => {
   try {

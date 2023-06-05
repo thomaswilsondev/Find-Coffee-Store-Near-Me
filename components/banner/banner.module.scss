@@ -12,20 +12,27 @@
 
   font-size: 3rem /* 48px */;
   line-height: 1;
-  &1 {
-    color: rgba(249, 250, 251, 1);
-  }
-  &2 {
-    display: block;
-    color: var(--text-purple);
-  }
-  &Sub {
-    margin-top: 0.75rem;
-    font-size: 1.5rem /* 24px */;
-    line-height: 2rem /* 32px */;
+}
 
-    color: var(--text-white-100);
-  }
+.title1 {
+  color: rgba(249, 250, 251, 1);
+}
+
+.title2 {
+  display: block;
+  color: var(--text-purple);
+}
+
+.subTitle {
+  margin-top: 0.75rem;
+  font-size: 1.5rem /* 24px */;
+  line-height: 2rem /* 32px */;
+
+  color: var(--text-white-100);
+}
+
+.buttonWrapper {
+  margin-top: 1.25rem;
 }
 
 .button {
@@ -41,12 +48,10 @@
   line-height: 1.75rem /* 28px */;
   padding-left: 2.5rem /* 40px */;
   padding-right: 2.5rem /* 40px */;
-  &:hover {
-    background-color: var(--text-purple-dark);
-  }
-  &Wrapper {
-    margin-top: 1.25rem;
-  }
+}
+
+.button:hover {
+  background-color: var(--text-purple-dark);
 }
 
 /** 
@@ -64,10 +69,11 @@
   .title {
     font-size: 3rem /* 48px */;
     line-height: 1;
-    &Sub {
-      margin-top: 1.25rem;
-      max-width: 36rem;
-    }
+  }
+
+  .subTitle {
+    margin-top: 1.25rem;
+    max-width: 36rem;
   }
 
   .buttonWrapper {
@@ -81,10 +87,12 @@
   .title {
     font-size: 3.75rem /* 60px */;
     line-height: 1;
-    &Sub {
-      margin-top: 1.25rem;
-    }
   }
+
+  .subTitle {
+    margin-top: 1.25rem;
+  }
+
   .button {
     padding-top: 1rem /* 16px */;
     padding-bottom: 1rem /* 16px */;
