@@ -6,7 +6,8 @@ function Problem() {
       </h1>
       <p>
         process.env.NEXT_PUBLIC_FOURSQUARE_API_KEY,
-        process.env.AIRTABLE_API_KEY, process.env.AIRTABLE_BASE_KEY,
+        process.env.NEXT_PUBLIC_AIRTABLE_API_KEY,
+        process.env.NEXT_PUBLIC_AIRTABLE_BASE_KEY,
         process.env.NEXT_PUBLIC_UNSPLASH_ACCESS_KEY
       </p>
     </div>
