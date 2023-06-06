@@ -8,8 +8,8 @@ For this app to work, you need to configure the following environment variables 
 
 ```
 NEXT_PUBLIC_FOURSQUARE_API_KEY=<value>
-AIRTABLE_API_KEY=<value>
-AIRTABLE_BASE_KEY=<value>
+NEXT_PUBLIC_AIRTABLE_API_KEY=<value>
+NEXT_PUBLIC_AIRTABLE_BASE_KEY=<value>
 NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=<value>
 ```
 
